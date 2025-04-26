@@ -6,7 +6,7 @@ export default function Card() {
         alt=""
         className="card-pic"
       />
-      <p className="title">Black Shaurma</p>
+      <p className="title">Freiburg Shaurma</p>
       <p>50$</p>
     </div>
   );
