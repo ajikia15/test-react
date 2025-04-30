@@ -1,5 +1,19 @@
 import "./Instagrampost.css";
+import { useState } from "react";
 export default function Instagrampost() {
+  const [likeCount, setLikeCount] = useState(1024);
+  const [isLiked, setIsLiked] = useState(false);
+  function like() {
+    // setIsLiked(!isLiked);
+
+    if (!isLiked) {
+      setLikeCount(likeCount + 1);
+      setIsLiked(true);
+    } else {
+      setLikeCount(likeCount - 1);
+      setIsLiked(false);
+    }
+  }
   return (
     <div className="ig-wrapper">
       <div className="ig-header">
@@ -42,8 +56,8 @@ export default function Instagrampost() {
       </div>
       <img className="ig-main-img" src="/post.jpg" alt="post" />
       <div className="ig-actions">
-        <span className="ig-like" style={{ color: "red" }}>
-          LIKE
+        <span className="ig-like" onClick={like}>
+          {isLiked ? <p>❤️</p> : <p>🤍</p>}
         </span>
         <span className="ig-comment">
           <svg
@@ -80,7 +94,7 @@ export default function Instagrampost() {
           </svg>
         </span>
       </div>
-      <div className="ig-likes">1024 likes</div>
+      <div className="ig-likes">{likeCount} likes</div>
       <div className="ig-caption">
         <span className="ig-username">FC Barcelona</span>
         💙 𝗖𝗢𝗣𝗔 𝗖𝗛𝗔𝗠𝗣𝗜𝗢𝗡𝗦𝗦𝗦𝗦𝗦 ❤️ <span className="ig-hashtag">

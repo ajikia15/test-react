@@ -1,6 +1,7 @@
 import "./App.css";
 import Card from "./Card";
 import Instagrampost from "./Instagrampost";
+import { useState } from "react";
 const movies = [
   {
     title: "hereditary",
@@ -26,7 +27,7 @@ function App() {
   return (
     <>
       <Instagrampost />
-      {movies.map((movie, i) => (
+      {/* {movies.map((movie, i) => (
         <Card
           key={i}
           title={movie.title}
@@ -34,7 +35,7 @@ function App() {
           rating={movie.rating}
           img={movie.img}
         />
-      ))}
+      ))} */}
     </>
   );
 }
