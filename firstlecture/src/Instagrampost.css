@@ -17,11 +17,16 @@
   justify-content: space-between;
   gap: 6px;
 }
-.ig-header-left {
+.ig-header-left,
+.ig-header-right {
   display: flex;
   align-items: center;
   padding: 12px;
   gap: 6px;
+}
+.ig-header-right {
+  color: #888;
+  cursor: pointer;
 }
 .ig-profile-pic {
   height: 24px;

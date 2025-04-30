@@ -25,7 +25,7 @@ const movies = [
 function App() {
   return (
     <>
-      {/* <Instagrampost /> */}
+      <Instagrampost />
       {movies.map((movie, i) => (
         <Card
           key={i}

@@ -22,7 +22,23 @@ export default function Instagrampost() {
 
           <span className="ig-time">1h</span>
         </div>
-        <div className="ig-header-rigth"></div>
+        <div className="ig-header-right">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0m7 0a1 1 0 1 0 2 0a1 1 0 1 0-2 0m7 0a1 1 0 1 0 2 0a1 1 0 1 0-2 0"
+            />
+          </svg>
+        </div>
       </div>
       <img className="ig-main-img" src="/post.jpg" alt="post" />
       <div className="ig-actions">
@@ -64,7 +80,7 @@ export default function Instagrampost() {
           </svg>
         </span>
       </div>
-      <div className="ig-likes">1,024 likes</div>
+      <div className="ig-likes">1024 likes</div>
       <div className="ig-caption">
         <span className="ig-username">FC Barcelona</span>
         💙 𝗖𝗢𝗣𝗔 𝗖𝗛𝗔𝗠𝗣𝗜𝗢𝗡𝗦𝗦𝗦𝗦𝗦 ❤️ <span className="ig-hashtag">
