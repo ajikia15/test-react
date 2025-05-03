@@ -1,6 +1,6 @@
 import "./Instagrampost.css";
 import { useState } from "react";
-export default function Instagrampost() {
+export default function Instagrampost(props) {
   const [likeCount, setLikeCount] = useState(1024);
   const [isLiked, setIsLiked] = useState(false);
   function like() {
@@ -24,7 +24,7 @@ export default function Instagrampost() {
             alt="profile"
           />
           <span className="ig-username">
-            <p>fcbarcelona</p>
+            <p>{props.title.slice(0, 10)}</p>
             <img
               src="https://www.pngall.com/wp-content/uploads/8/Verification-Blue-Tick.png"
               alt=""
@@ -97,12 +97,10 @@ export default function Instagrampost() {
       <div className="ig-likes">{likeCount} likes</div>
       <div className="ig-caption">
         <span className="ig-username">FC Barcelona</span>
-        💙 𝗖𝗢𝗣𝗔 𝗖𝗛𝗔𝗠𝗣𝗜𝗢𝗡𝗦𝗦𝗦𝗦𝗦 ❤️ <span className="ig-hashtag">
-          @spotify
-        </span>{" "}
+        {props.body} <span className="ig-hashtag">@spotify</span>{" "}
         <span className="ig-hashtag">#clasico</span>
       </div>
-      <div className="ig-comments">View all 42 comments</div>
+      <div className="ig-comments">View all {props.id} comments</div>
     </div>
   );
 }
