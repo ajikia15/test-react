@@ -51,13 +51,7 @@ export default function Home() {
         ></input>
         <button onClick={handleAddPost}>Add new post</button>
       </div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2,1fr)",
-          gap: "5px",
-        }}
-      ></div>
+
       <div
         style={{
           display: "flex",
@@ -67,7 +61,6 @@ export default function Home() {
           marginTop: "32px",
         }}
       >
-        {/* Normal cards with API data */}
         {posts.map((post, idx) => (
           <Card
             key={idx}

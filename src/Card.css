@@ -65,7 +65,6 @@
   align-items: center;
   height: 36px;
 }
-/* Subtle floating effect */
 .normal-card::after {
   content: "";
   display: block;
