@@ -1,36 +1,13 @@
 import Card from "../src/Card";
 import { useState, useEffect } from "react";
 
-const fakeCards = [
-  {
-    title: "Beautiful Lake",
-    body: "A serene view of the lake at sunset.",
-    image: "/post.jpg",
-    rating: 4.7,
-  },
-  {
-    title: "Mountain Hike",
-    body: "Challenging but rewarding mountain trail.",
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
-    rating: 4.9,
-  },
-  {
-    title: "City Lights",
-    body: "The city comes alive at night with vibrant lights.",
-    image:
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
-    rating: 4.5,
-  },
-];
-
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+    fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => setPosts(data));
   }, []);
@@ -95,9 +72,13 @@ export default function Home() {
           <Card
             key={idx}
             title={post.title}
-            body={post.body}
-            image={"/post.jpg"}
-            rating={((post.id % 5) + 1).toFixed(1)}
+            body={post.description}
+            image={post.image}
+            rating={
+              post.rating?.rate
+                ? post.rating.rate
+                : ((post.id % 5) + 1).toFixed(1)
+            }
             id={post.id}
           />
         ))}
