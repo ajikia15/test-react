@@ -1,5 +1,28 @@
-import Instagrampost from "../src/Instagrampost";
+import Card from "../src/Card";
 import { useState, useEffect } from "react";
+
+const fakeCards = [
+  {
+    title: "Beautiful Lake",
+    body: "A serene view of the lake at sunset.",
+    image: "/post.jpg",
+    rating: 4.7,
+  },
+  {
+    title: "Mountain Hike",
+    body: "Challenging but rewarding mountain trail.",
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+    rating: 4.9,
+  },
+  {
+    title: "City Lights",
+    body: "The city comes alive at night with vibrant lights.",
+    image:
+      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+    rating: 4.5,
+  },
+];
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -57,12 +80,24 @@ export default function Home() {
           gridTemplateColumns: "repeat(2,1fr)",
           gap: "5px",
         }}
+      ></div>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "16px",
+          justifyContent: "center",
+          marginTop: "32px",
+        }}
       >
-        {posts.map((post, i) => (
-          <Instagrampost
-            key={i}
+        {/* Normal cards with API data */}
+        {posts.map((post, idx) => (
+          <Card
+            key={idx}
             title={post.title}
             body={post.body}
+            image={"/post.jpg"}
+            rating={((post.id % 5) + 1).toFixed(1)}
             id={post.id}
           />
         ))}

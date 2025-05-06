@@ -1,15 +1,35 @@
-export default function Card(props) {
-  function like(title) {
-    console.log("Liked - ", title);
-  }
+import "./Card.css";
 
+export default function Card({ title, body, image, rating, id }) {
   return (
-    <div className="card">
-      <img src={props.img} alt="" className="card-pic" />
-      <p className="title">{props.title.toUpperCase()}</p>
-      <p>Duration - {props.length}</p>
-      <p>{props.rating}/100</p>
-      <button onClick={() => like(props.title)}>Like</button>
+    <div className="normal-card">
+      <img className="normal-card-img" src={image} alt="card visual" />
+      <div className="normal-card-content">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h3 className="normal-card-title">{title}</h3>
+          <span className="normal-card-id" title="Card ID">
+            #{id}
+          </span>
+        </div>
+        <p className="normal-card-body">{body}</p>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: 12,
+          }}
+        >
+          <div className="normal-card-rating">⭐ {rating}/5</div>
+          <button className="normal-card-details-btn">Details →</button>
+        </div>
+      </div>
     </div>
   );
 }
