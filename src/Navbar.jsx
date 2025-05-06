@@ -1,6 +1,5 @@
 import "./Navbar.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 export default function Navbar() {
   const [search, setSearch] = useState("");
 
@@ -13,9 +12,9 @@ export default function Navbar() {
       <div className="navbar-left">
         <img src="/vite.svg" alt="Logo" className="navbar-logo" />
         <span className="navbar-title">FakeStoreApp</span>
-        <Link to="/" className="navbar-link">
+        <a href="/" className="navbar-link">
           Home
-        </Link>
+        </a>
         <a href="#" className="navbar-link">
           About
         </a>

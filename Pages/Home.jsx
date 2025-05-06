@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div>
+      {/* <div>
         <h2>Add a post</h2>
         {newTitle} {newBody}
         <br />
@@ -51,7 +51,7 @@ export default function Home() {
           }}
         ></input>
         <button onClick={handleAddPost}>Add new post</button>
-      </div>
+      </div> */}
 
       <div
         style={{
@@ -68,11 +68,7 @@ export default function Home() {
             title={post.title}
             body={post.description}
             image={post.image}
-            rating={
-              post.rating?.rate
-                ? post.rating.rate
-                : ((post.id % 5) + 1).toFixed(1)
-            }
+            rating={5}
             id={post.id}
           />
         ))}
