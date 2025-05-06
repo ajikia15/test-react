@@ -1,5 +1,4 @@
 export default function Postpage() {
-  // Example static/fake data
   const post = {
     id: 42,
     title: "Modern Wireless Headphones",

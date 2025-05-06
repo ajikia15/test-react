@@ -4,6 +4,10 @@
   font-family: "Inter", "Roboto", system-ui, sans-serif;
 }
 
+a {
+  all: unset;
+  cursor: pointer;
+}
 body,
 html,
 #root,

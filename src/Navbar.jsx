@@ -1,12 +1,11 @@
 import "./Navbar.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-export default function Navbar({ onSearch }) {
+export default function Navbar() {
   const [search, setSearch] = useState("");
 
   function handleInput(e) {
     setSearch(e.target.value);
-    if (onSearch) onSearch(e.target.value);
   }
 
   return (
@@ -36,9 +35,7 @@ export default function Navbar({ onSearch }) {
             value={search}
             onChange={handleInput}
           />
-          <button className="navbar-search-btn" tabIndex={-1}>
-            🔍
-          </button>
+          <button className="navbar-search-btn">🔍</button>
         </div>
       </div>
     </nav>
