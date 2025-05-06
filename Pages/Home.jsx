@@ -1,6 +1,6 @@
 import Card from "../src/Card";
 import { useState, useEffect } from "react";
-
+import Navbar from "../src/Navbar";
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [newTitle, setNewTitle] = useState("");
@@ -29,6 +29,7 @@ export default function Home() {
   }
   return (
     <>
+      <Navbar />
       <div>
         <h2>Add a post</h2>
         {newTitle} {newBody}
