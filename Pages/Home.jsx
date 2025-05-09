@@ -29,7 +29,6 @@ export default function Home() {
   }
   return (
     <>
-      <Navbar />
       {/* <div>
         <h2>Add a post</h2>
         {newTitle} {newBody}
@@ -62,9 +61,9 @@ export default function Home() {
           marginTop: "32px",
         }}
       >
-        {posts.map((post, idx) => (
+        {posts.map((post, i) => (
           <Card
-            key={idx}
+            key={i}
             title={post.title}
             body={post.description}
             image={post.image}

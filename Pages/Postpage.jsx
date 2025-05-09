@@ -1,7 +1,8 @@
 import "./Postpage.css";
-
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 export default function Postpage() {
-  const post = {
+  const post1 = {
     id: 5,
     title:
       "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
@@ -13,6 +14,21 @@ export default function Postpage() {
     rating: { rate: 4.6, count: 400 },
   };
 
+  const { id } = useParams();
+  const [post, setPost] = useState({});
+  // useEffect(() => {
+  //   fetch("https://fakestoreapi.com/products")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const foundPost = data.find((item) => item.id === parseInt(id));
+  //       setPost(foundPost);
+  //     });
+  // }, []);
+  useEffect(() => {
+    fetch(`https://fakestoreapi.com/products/${id}`)
+      .then((res) => res.json())
+      .then((data) => setPost(data));
+  }, []);
   return (
     <div>
       <div className="postpage-hero">

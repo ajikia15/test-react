@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Card.css";
 export default function Card({ title, body, image, rating, id }) {
   return (
@@ -27,7 +28,7 @@ export default function Card({ title, body, image, rating, id }) {
         >
           <div className="normal-card-rating">⭐ {rating}/5</div>
           <button className="normal-card-details-btn">
-            <a href="/post/5">Details →</a>
+            <Link to={`/post/${id}`}>Details → </Link>
           </button>
         </div>
       </div>
