@@ -1,12 +1,16 @@
 import "./Navbar.css";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [search, setSearch] = useState("");
-
+  const navigate = useNavigate();
   function handleInput(e) {
     setSearch(e.target.value);
   }
 
+  function handleSearch() {
+    if (search.trim() !== "") navigate(`/search/${search}`);
+  }
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -34,7 +38,15 @@ export default function Navbar() {
             value={search}
             onChange={handleInput}
           />
-          <button className="navbar-search-btn">🔍</button>
+          <button className="navbar-search-btn" onClick={handleSearch}>
+            🔍
+          </button>
+          <Link
+            to={search.trim() !== "" ? `/search/${search}` : "#"}
+            className="navbar-search-btn"
+          >
+            🔍
+          </Link>
         </div>
       </div>
     </nav>
