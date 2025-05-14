@@ -19,9 +19,9 @@ export default function Navbar() {
         <a href="/" className="navbar-link">
           Home
         </a>
-        <a href="#" className="navbar-link">
+        <Link to="/about" className="navbar-link bg-black">
           About
-        </a>
+        </Link>
         <a href="#" className="navbar-link">
           Contact
         </a>

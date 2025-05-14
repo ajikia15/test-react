@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./Card.css";
 export default function Card({ title, body, image, rating, id }) {
   return (
-    <div className="normal-card">
+    <div className="normal-card ">
       <img className="normal-card-img" src={image} alt="card visual" />
       <div className="normal-card-content">
         <div
