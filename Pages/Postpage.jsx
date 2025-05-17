@@ -1,6 +1,7 @@
 import "./Postpage.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getProduct } from "../src/hooks/useDocs";
 export default function Postpage() {
   const post1 = {
     id: 5,
@@ -15,54 +16,44 @@ export default function Postpage() {
   };
 
   const { id } = useParams();
-  const [post, setPost] = useState({});
-  // useEffect(() => {
-  //   fetch("https://fakestoreapi.com/products")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const foundPost = data.find((item) => item.id === parseInt(id));
-  //       setPost(foundPost);
-  //     });
-  // }, []);
+  const [product, setProduct] = useState({});
+
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => setPost(data));
+    const fetchData = async () => {
+      const data = await getProduct(id);
+      setProduct(data);
+    };
+    fetchData();
   }, []);
   return (
     <div>
       <div className="postpage-hero">
-        <img src={post.image} alt={post.title} className="postpage-hero-img" />
+        <img
+          src={product.imageurl}
+          alt={product.title}
+          className="postpage-hero-img"
+        />
       </div>
       <section className="postpage-main">
         <div className="postpage-main-left" />
         <div className="postpage-main-right">
           <h1 className="postpage-title">
-            {post.title} # {post.id}
+            {product.title} # {id}
           </h1>
           <div className="postpage-meta">
             <span className="postpage-rating">
-              <span style={{ fontSize: "1.3em" }}>★</span> {post.rating?.rate}/5
+              <span style={{ fontSize: "1.3em" }}>★</span> {product.rating}/5
             </span>
-            <span className="postpage-category">{post.category}</span>
-            <span className="postpage-brand">Brand: {post.brand}</span>
-            <span
-              className={
-                post.stock > 0 ? "postpage-stock" : "postpage-stock out"
-              }
-            >
-              {post.stock > 0 ? `In Stock (${post.stock})` : "Out of Stock"}
-            </span>
+            <span className="postpage-category">Laptops</span>
+            <span className="postpage-brand">Brand: {product.title}</span>
           </div>
-          <div className="postpage-desc">{post.description}</div>
+          <div className="postpage-desc">{product.title}</div>
           <div className="postpage-price-row">
-            <span className="postpage-price">${post.price}</span>
-            <span className="postpage-id">Product ID: #{post.id}</span>
+            <span className="postpage-price">${product.price}</span>
+            <span className="postpage-id">Product ID: #{id}</span>
           </div>
           <div className="postpage-actions">
-            <button className="postpage-buy-btn" disabled={post.stock === 0}>
-              {post.stock > 0 ? "Buy Now" : "Out of Stock"}
-            </button>
+            <button className="postpage-buy-btn">Buy Now</button>
             <button className="postpage-wishlist-btn">Add to Wishlist</button>
           </div>
         </div>

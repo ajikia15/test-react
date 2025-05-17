@@ -11,6 +11,7 @@ export default function Navbar() {
   function handleSearch() {
     if (search.trim() !== "") navigate(`/search/${search}`);
   }
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -19,12 +20,12 @@ export default function Navbar() {
         <a href="/" className="navbar-link">
           Home
         </a>
-        <Link to="/about" className="navbar-link bg-black">
+        <Link to="/about" className="navbar-link">
           About
         </Link>
-        <a href="#" className="navbar-link">
-          Contact
-        </a>
+        <Link to="/create" className="navbar-link">
+          Create Post
+        </Link>
         <a href="#" className="navbar-link">
           Blog
         </a>
@@ -38,9 +39,7 @@ export default function Navbar() {
             value={search}
             onChange={handleInput}
           />
-          <button className="navbar-search-btn" onClick={handleSearch}>
-            🔍
-          </button>
+
           <Link
             to={search.trim() !== "" ? `/search/${search}` : "#"}
             className="navbar-search-btn"
