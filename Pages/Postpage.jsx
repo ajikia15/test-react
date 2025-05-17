@@ -1,7 +1,6 @@
 import "./Postpage.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProduct } from "../src/hooks/useDocs";
 export default function Postpage() {
   const post1 = {
     id: 5,
@@ -18,13 +17,6 @@ export default function Postpage() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getProduct(id);
-      setProduct(data);
-    };
-    fetchData();
-  }, []);
   return (
     <div>
       <div className="postpage-hero">

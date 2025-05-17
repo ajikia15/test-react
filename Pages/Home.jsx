@@ -1,74 +1,29 @@
 import Card from "../src/Card";
 import { useState, useEffect } from "react";
-import Navbar from "../src/Navbar";
+import { getAllLaptops } from "../src/hooks/useDocs";
 export default function Home() {
-  const [posts, setPosts] = useState([]);
-  const [newTitle, setNewTitle] = useState("");
-  const [newBody, setNewBody] = useState("");
-
+  const [laptops, setLaptops] = useState([]);
+  async function fetchData() {
+    const data = await getAllLaptops();
+    console.log(data);
+    setLaptops(data);
+  }
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
+    fetchData();
   }, []);
 
-  function handleAddPost() {
-    if (newTitle.trim() === "" || newBody.trim() === "") {
-      return;
-    }
-
-    const newPost = {
-      id: Date.now(),
-      title: newTitle,
-      body: newBody,
-    };
-
-    setPosts([newPost, ...posts]);
-    setNewTitle("");
-    setNewBody("");
-  }
   return (
     <>
-      {/* <div>
-        <h2>Add a post</h2>
-        {newTitle} {newBody}
-        <br />
-        <input
-          type="text"
-          placeholder="Input text title"
-          value={newTitle}
-          onChange={(e) => {
-            setNewTitle(e.target.value);
-          }}
-        ></input>
-        <input
-          type="text"
-          placeholder="Input text title"
-          value={newBody}
-          onChange={(e) => {
-            setNewBody(e.target.value);
-          }}
-        ></input>
-        <button onClick={handleAddPost}>Add new post</button>
-      </div> */}
-
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "16px",
-          justifyContent: "center",
-          marginTop: "32px",
-        }}
-      >
-        {posts.map((post, i) => (
+      <div className="flex flex-wrap gap-6 justify-center mt-12">
+        {laptops.map((laptop, i) => (
           <Card
             key={i}
-            title={post.title}
-            body={post.description}
-            image={post.image}
-            rating={5}
-            id={post.id}
+            title={laptop.title}
+            body={laptop.description}
+            image={laptop.image}
+            like={laptop.like}
+            rating={laptop.rating}
+            price={laptop.price}
           />
         ))}
       </div>
