@@ -1,19 +1,21 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { getAllLaptops } from "../src/hooks/useDocs";
 import Card from "../src/Card";
 export default function Searchpage() {
   const { term } = useParams();
-  const [posts, setPosts] = useState([]);
+  const [laptops, setLaptops] = useState([]);
+  async function fetchData() {
+    const data = await getAllLaptops();
+    const filteredLaptops = data.filter((laptop) =>
+      laptop.title.toLowerCase().includes(term.toLowerCase())
+    );
+    setLaptops(filteredLaptops);
+    console.log(laptops);
+  }
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => {
-        const result = data.filter((item) =>
-          item.title.toLowerCase().includes(term.toLowerCase())
-        );
-        setPosts(result);
-      });
-  }, [term]);
+    fetchData();
+  }, []);
   return (
     <div>
       <h1>Search - {term}</h1>
@@ -26,20 +28,20 @@ export default function Searchpage() {
           marginTop: "32px",
         }}
       >
-        {posts.length > 0 ? (
-          posts.map((post, i) => (
+        {laptops.length > 0 &&
+          laptops.map((laptop, i) => (
             <Card
               key={i}
-              title={post.title}
-              body={post.description}
-              image={post.image}
-              rating={5}
-              id={post.id}
+              id={laptop.id}
+              title={laptop.title}
+              body={laptop.description}
+              image={laptop.image}
+              like={laptop.like}
+              rating={laptop.rating}
+              price={laptop.price}
             />
-          ))
-        ) : (
-          <div> no results found</div>
-        )}
+          ))}
+        {laptops.length < 0 && <div>No results found</div>}
       </div>
     </div>
   );

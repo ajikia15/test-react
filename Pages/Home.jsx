@@ -24,6 +24,7 @@ export default function Home() {
             like={laptop.like}
             rating={laptop.rating}
             price={laptop.price}
+            id={laptop.id}
           />
         ))}
       </div>

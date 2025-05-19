@@ -1,28 +1,24 @@
 import "./Postpage.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getLaptop } from "../src/hooks/useDocs";
 export default function Postpage() {
-  const post1 = {
-    id: 5,
-    title:
-      "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-    price: 695,
-    description:
-      "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
-    category: "jewelery",
-    image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
-    rating: { rate: 4.6, count: 400 },
-  };
-
   const { id } = useParams();
-  const [product, setProduct] = useState({});
-
+  const [laptop, setLaptop] = useState({});
+  async function fetchData() {
+    const data = await getLaptop(id);
+    console.log(data);
+    setLaptop(data);
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div>
       <div className="postpage-hero">
         <img
-          src={product.imageurl}
-          alt={product.title}
+          src={laptop.image}
+          alt={laptop.title}
           className="postpage-hero-img"
         />
       </div>
@@ -30,19 +26,19 @@ export default function Postpage() {
         <div className="postpage-main-left" />
         <div className="postpage-main-right">
           <h1 className="postpage-title">
-            {product.title} # {id}
+            {laptop.title} # {id}
           </h1>
           <div className="postpage-meta">
             <span className="postpage-rating">
-              <span style={{ fontSize: "1.3em" }}>★</span> {product.rating}/5
+              <span style={{ fontSize: "1.3em" }}>★</span> {laptop.rating}/5
             </span>
             <span className="postpage-category">Laptops</span>
-            <span className="postpage-brand">Brand: {product.title}</span>
+            <span className="postpage-brand">Brand: {laptop.title}</span>
           </div>
-          <div className="postpage-desc">{product.title}</div>
+          <div className="postpage-desc">{laptop.title}</div>
           <div className="postpage-price-row">
-            <span className="postpage-price">${product.price}</span>
-            <span className="postpage-id">Product ID: #{id}</span>
+            <span className="postpage-price">${laptop.price}</span>
+            <span className="postpage-id">laptop ID: #{id}</span>
           </div>
           <div className="postpage-actions">
             <button className="postpage-buy-btn">Buy Now</button>

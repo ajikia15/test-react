@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Card.css";
-export default function Card({ title, like, image, rating, price }) {
+export default function Card({ id, title, like, image, rating, price }) {
+  console.log(id);
   return (
     <div className="normal-card ">
       <img className="normal-card-img" src={image} alt="card visual" />
@@ -28,7 +29,7 @@ export default function Card({ title, like, image, rating, price }) {
         >
           <div className="normal-card-rating">⭐ {rating}/5</div>
           <button className="normal-card-details-btn">
-            {/* <Link to={`/post/${id}`}>Details → </Link> */} Details
+            <Link to={`/post/${id}`}>Details → </Link>
           </button>
         </div>
       </div>
