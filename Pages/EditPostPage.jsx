@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { addLaptop } from "../src/hooks/useDocs";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { getLaptop } from "../src/hooks/useDocs";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { editLaptop } from "../src/hooks/useDocs";
 import { toast } from "react-toastify";
-
-export default function CreatePostPage() {
-  const navigate = useNavigate();
+export default function EditPostPage() {
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const {
     register,
     handleSubmit,
@@ -14,26 +17,94 @@ export default function CreatePostPage() {
   } = useForm({
     mode: "onChange",
   });
-  async function laptopSubmit(data) {
-    const result = await addLaptop(
-      data.title,
-      data.price,
-      data.rating,
-      data.like,
-      data.image
-    );
-    if (result) {
-      toast.success("Laptop added successfully");
-      reset();
-      navigate("/admin-dashboard");
-    } else {
-      toast.error("Error with adding laptop");
+
+  async function fetchData() {
+    try {
+      const data = await getLaptop(id);
+      console.log(data);
+      reset({
+        title: data.title,
+        price: data.price,
+        rating: data.rating,
+        like: data.like,
+        image: data.image,
+      });
+    } catch (error) {
+      toast.error("Failed to fetch laptop data");
+    } finally {
+      setLoading(false);
     }
   }
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function laptopSubmit(data) {
+    try {
+      await editLaptop(
+        id,
+        data.title,
+        data.price,
+        data.rating,
+        data.like,
+        data.image
+      );
+    } catch (e) {
+      toast.error("Error with updating laptop", e);
+    } finally {
+      toast.success("Laptop Updated sucessfully");
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+        <div className="h-8 bg-gray-200 rounded animate-pulse mb-8"></div>
+
+        <div className="space-y-6">
+          {/* Title Field Skeleton */}
+          <div>
+            <div className="h-4 bg-gray-200 rounded animate-pulse mb-1 w-24"></div>
+            <div className="h-10 bg-gray-200 rounded animate-pulse"></div>
+          </div>
+
+          {/* Image URL Field Skeleton */}
+          <div>
+            <div className="h-4 bg-gray-200 rounded animate-pulse mb-1 w-20"></div>
+            <div className="h-10 bg-gray-200 rounded animate-pulse"></div>
+          </div>
+
+          {/* Like Field Skeleton */}
+          <div>
+            <div className="h-4 bg-gray-200 rounded animate-pulse mb-1 w-12"></div>
+            <div className="h-10 bg-gray-200 rounded animate-pulse"></div>
+          </div>
+
+          {/* Price Field Skeleton */}
+          <div>
+            <div className="h-4 bg-gray-200 rounded animate-pulse mb-1 w-16"></div>
+            <div className="h-10 bg-gray-200 rounded animate-pulse"></div>
+          </div>
+
+          {/* Rating Field Skeleton */}
+          <div>
+            <div className="h-4 bg-gray-200 rounded animate-pulse mb-1 w-20"></div>
+            <div className="h-10 bg-gray-200 rounded animate-pulse"></div>
+          </div>
+
+          {/* Submit Button Skeleton */}
+          <div>
+            <div className="h-10 bg-gray-200 rounded animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
-        Create New Product
+        Edit Product
       </h2>
 
       <form className="space-y-6" onSubmit={handleSubmit(laptopSubmit)}>
@@ -169,7 +240,7 @@ export default function CreatePostPage() {
             disabled={isSubmitting}
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-300"
           >
-            Add Product
+            Edit Product
           </button>
         </div>
       </form>

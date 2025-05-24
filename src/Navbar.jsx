@@ -23,12 +23,10 @@ export default function Navbar() {
         <Link to="/about" className="navbar-link">
           About
         </Link>
-        <Link to="/create" className="navbar-link">
-          Create Post
+
+        <Link to="/admin-dashboard" className="navbar-link">
+          Dashboard
         </Link>
-        <a href="#" className="navbar-link">
-          Blog
-        </a>
       </div>
       <div className="navbar-right">
         <div className="navbar-search-group">
