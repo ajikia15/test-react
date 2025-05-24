@@ -8,22 +8,33 @@ import {
   getDocs,
   onSnapshot,
   doc,
+  deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCYEBZSJGHIbWivUVgmUF0ozhKzbT2XAhk",
-  authDomain: "react-ogond-martla.firebaseapp.com",
-  projectId: "react-ogond-martla",
-  storageBucket: "react-ogond-martla.firebasestorage.app",
-  messagingSenderId: "14408506951",
-  appId: "1:14408506951:web:c54d67d8a97e3218219b62",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-export { getDoc, addDoc, collection, getDocs, onSnapshot, doc };
+export {
+  getDoc,
+  addDoc,
+  collection,
+  getDocs,
+  onSnapshot,
+  doc,
+  deleteDoc,
+  updateDoc,
+};

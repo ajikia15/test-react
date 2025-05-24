@@ -5,7 +5,6 @@ export default function Home() {
   const [laptops, setLaptops] = useState([]);
   async function fetchData() {
     const data = await getAllLaptops();
-    console.log(data);
     setLaptops(data);
   }
   useEffect(() => {

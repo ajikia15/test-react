@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Card.css";
 export default function Card({ id, title, like, image, rating, price }) {
-  console.log(id);
   return (
     <div className="normal-card ">
       <img className="normal-card-img" src={image} alt="card visual" />

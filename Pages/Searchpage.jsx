@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { getAllLaptops } from "../src/hooks/useDocs";
 import Card from "../src/Card";
+import SkeletonCard from "../src/SkeletonCard";
 export default function Searchpage() {
   const { term } = useParams();
   const [laptops, setLaptops] = useState([]);
@@ -11,11 +12,10 @@ export default function Searchpage() {
       laptop.title.toLowerCase().includes(term.toLowerCase())
     );
     setLaptops(filteredLaptops);
-    console.log(laptops);
   }
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [term]);
   return (
     <div>
       <h1>Search - {term}</h1>
@@ -28,20 +28,22 @@ export default function Searchpage() {
           marginTop: "32px",
         }}
       >
-        {laptops.length > 0 &&
-          laptops.map((laptop, i) => (
-            <Card
-              key={i}
-              id={laptop.id}
-              title={laptop.title}
-              body={laptop.description}
-              image={laptop.image}
-              like={laptop.like}
-              rating={laptop.rating}
-              price={laptop.price}
-            />
-          ))}
-        {laptops.length < 0 && <div>No results found</div>}
+        <Suspense fallback={<SkeletonCard />}>
+          {laptops.length > 0 &&
+            laptops.map((laptop, i) => (
+              <Card
+                key={i}
+                id={laptop.id}
+                title={laptop.title}
+                body={laptop.description}
+                image={laptop.image}
+                like={laptop.like}
+                rating={laptop.rating}
+                price={laptop.price}
+              />
+            ))}
+          {laptops.length < 0 && <div>No results found</div>}
+        </Suspense>
       </div>
     </div>
   );

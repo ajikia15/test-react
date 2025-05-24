@@ -7,7 +7,6 @@ export default function Postpage() {
   const [laptop, setLaptop] = useState({});
   async function fetchData() {
     const data = await getLaptop(id);
-    console.log(data);
     setLaptop(data);
   }
   useEffect(() => {

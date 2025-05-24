@@ -1,11 +1,14 @@
-import { useState } from "react";
-import { addLaptop } from "../src/hooks/useDocs";
+import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { getLaptop, editLaptop } from "../src/hooks/useDocs";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
-export default function CreatePostPage() {
-  const navigate = useNavigate();
+export default function EditPostPage() {
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -14,27 +17,69 @@ export default function CreatePostPage() {
   } = useForm({
     mode: "onChange",
   });
-  async function laptopSubmit(data) {
-    const result = await addLaptop(
-      data.title,
-      data.price,
-      data.rating,
-      data.like,
-      data.image
-    );
 
-    if (result) {
-      toast.success("Laptop added successfully!");
-      reset();
-      navigate("/dashboard");
-    } else {
-      toast.error("Failed to add laptop");
+  async function fetchData() {
+    try {
+      const data = await getLaptop(id);
+      reset({
+        title: data.title || "",
+        image: data.image || "",
+        like: data.like || 0,
+        price: data.price || 0,
+        rating: data.rating || 0,
+      });
+    } catch (error) {
+      console.error("Error fetching laptop:", error);
+      toast.error("Failed to load laptop data");
+    } finally {
+      setLoading(false);
     }
   }
+
+  useEffect(() => {
+    fetchData();
+  }, [id]);
+
+  async function laptopSubmit(data) {
+    try {
+      await editLaptop(
+        id,
+        data.title,
+        data.price,
+        data.rating,
+        data.like,
+        data.image
+      );
+      toast.success("Laptop updated successfully!");
+    } catch (error) {
+      console.error("Error updating laptop:", error);
+      toast.error("Failed to update laptop");
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="max-w-md mx-auto mt-10 p-6">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 rounded mb-8"></div>
+          <div className="space-y-6">
+            {[...Array(5)].map((_, i) => (
+              <div key={i}>
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded"></div>
+              </div>
+            ))}
+            <div className="h-10 bg-gray-200 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
-        Create New Product
+        Edit Product
       </h2>
 
       <form className="space-y-6" onSubmit={handleSubmit(laptopSubmit)}>
@@ -168,9 +213,9 @@ export default function CreatePostPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-300"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-300 disabled:opacity-50"
           >
-            Add Product
+            {isSubmitting ? "Updating..." : "Update Product"}
           </button>
         </div>
       </form>

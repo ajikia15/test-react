@@ -6,6 +6,9 @@ import Navbar from "./Navbar";
 import Searchpage from "../Pages/Searchpage";
 import About from "../Pages/About";
 import CreatePostPage from "../Pages/CreatePostPage";
+import Dashboard from "../Pages/Dashboard";
+import { ToastContainer, toast } from "react-toastify";
+import EditPostPage from "../Pages/EditPage";
 function App() {
   return (
     <>
@@ -16,7 +19,21 @@ function App() {
         <Route path="/search/:term" element={<Searchpage />} />
         <Route path="/about" element={<About />} />
         <Route path="/create" element={<CreatePostPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
+        <Route path="/edit/:id" element={<EditPostPage />} />
       </Routes>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="dark"
+      />
     </>
   );
 }

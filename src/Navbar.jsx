@@ -17,18 +17,18 @@ export default function Navbar() {
       <div className="navbar-left">
         <img src="/vite.svg" alt="Logo" className="navbar-logo" />
         <span className="navbar-title">FakeStoreApp</span>
-        <a href="/" className="navbar-link">
+        <Link to="/" className="navbar-link">
           Home
-        </a>
+        </Link>
         <Link to="/about" className="navbar-link">
           About
         </Link>
         <Link to="/create" className="navbar-link">
           Create Post
         </Link>
-        <a href="#" className="navbar-link">
-          Blog
-        </a>
+        <Link to="/dashboard" className="navbar-link">
+          Dashboard
+        </Link>
       </div>
       <div className="navbar-right">
         <div className="navbar-search-group">
