@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { getAllLaptops } from "../src/hooks/useDocs";
 import { Eye, Edit, Trash2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TableSkeleton from "../src/TableSkeleton";
-
+import { UserContext } from "../src/contexts/UserContext";
+import { useContext } from "react";
 export default function AdminDashboard() {
+  const { user } = useContext(UserContext);
+
+  if (!user) {
+    return <Navigate to="/sign-in" />;
+  }
+
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true);
 
