@@ -1,8 +1,11 @@
 import "./Navbar.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "./contexts/UserContext";
 export default function Navbar() {
   const [search, setSearch] = useState("");
+  const { user, login, logout } = useContext(UserContext);
   const navigate = useNavigate();
   function handleInput(e) {
     setSearch(e.target.value);
@@ -11,7 +14,6 @@ export default function Navbar() {
   function handleSearch() {
     if (search.trim() !== "") navigate(`/search/${search}`);
   }
-
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -23,10 +25,15 @@ export default function Navbar() {
         <Link to="/about" className="navbar-link">
           About
         </Link>
-
-        <Link to="/admin-dashboard" className="navbar-link">
-          Dashboard
-        </Link>
+        {user ? (
+          <Link to="/admin-dashboard" className="navbar-link">
+            Dashboard
+          </Link>
+        ) : (
+          <Link to="/sign-in" className="navbar-link">
+            Sign in
+          </Link>
+        )}
       </div>
       <div className="navbar-right">
         <div className="navbar-search-group">

@@ -9,9 +9,11 @@ import CreatePostPage from "../Pages/CreatePostPage";
 import AdminDashboard from "../Pages/AdminDashboard";
 import { ToastContainer } from "react-toastify";
 import EditPostPage from "../Pages/EditPostPage";
+import UserProvider from "./contexts/UserContext";
+import SignIn from "../Pages/SignIn";
 function App() {
   return (
-    <>
+    <UserProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,6 +23,7 @@ function App() {
         <Route path="/create" element={<CreatePostPage />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/edit/:id" element={<EditPostPage />} />
+        <Route path="/sign-in" element={<SignIn />} />
       </Routes>
       <ToastContainer
         position="bottom-right"
@@ -30,7 +33,7 @@ function App() {
         rtl={false}
         theme="dark"
       />
-    </>
+    </UserProvider>
   );
 }
 
